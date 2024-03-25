@@ -1,16 +1,10 @@
 ---
-knit: (function(inputFile, encoding) {
-      out_dir <- "output";
-      rmarkdown::render(inputFile,
-                        encoding=encoding,
-                        output_dir=file.path(dirname(inputFile), out_dir))})
-title: "**Tarea 2**"
+title: "**Tarea 2 - Interpretación tabla de vida**"
 author: |
-   | Clase: Análisis de Historias de Eventos
+   | Cátedra: Análisis de Historias de Eventos
    | Profesora: Viviana Salinas
    | Estudiante: Andreas Laffert
-   | email: alaffertt@estudiante.uc.cl
-date: "Fecha: 02-08-2023"
+date: "Fecha: 25-03-2024"
 output:
   pdf_document:
     number_sections: no
@@ -40,11 +34,11 @@ header-includes:
     - \usepackage{graphicx}
     - \usepackage{fancyhdr}
     - \usepackage{eso-pic}
-    - \AtBeginDocument{\AddToShipoutPictureBG*{\put(0,\dimexpr\paperheight-4cm){\makebox[0pt][l]{\hspace{1cm}\includegraphics[width=4cm]{logo_isuc.png}}}}}
+    - \AtBeginDocument{\AddToShipoutPictureBG*{\put(0,\dimexpr\paperheight-3cm){\makebox[0pt][l]{\hspace{1cm}\includegraphics[width=4cm]{logo_isuc.png}}}}}
     - \usepackage[subrefformat=simple]{subfig}
 geometry: margin=2cm
-fontsize: 12pt
 linestretch: '1.15'
+fontsize: 12pt
 urlcolor: blue
 link-citations: yes
 linkcolor: blue
@@ -110,221 +104,107 @@ for (i in seq_along(lista)) {
 ```{r analysis, echo=FALSE}
 
 # nmx
-g1 <- hombres_b %>% 
-  ggplot(aes(x = t, y = nmx, group = 1)) +
-  geom_line() +
-  scale_x_continuous(n.breaks = 10) +
-  labs(title = "Hombres blancos") +
-  theme_bw(base_size = 12)
-  
 
-g2 <- hombres_n %>% 
-  ggplot(aes(x = t, y = nmx, group = 1)) +
-  geom_line() +
+fig1 <- data.frame(edad = hombres_b$edad,
+           t = hombres_b$t,
+           nmx_hombres_blancos = hombres_b$nmx,
+           nmx_hombres_negros = hombres_n$nmx,
+           nmx_mujeres_blancas = mujeres_b$nmx,
+           nmx_mujeres_negras = mujeres_n$nmx) %>% 
+  mutate(edad = factor(edad, levels = edad)) %>% 
+  pivot_longer(cols = -c(1,2),
+               names_to = "grupo",
+               values_to = "nmx") %>% 
+  mutate(grupo = str_remove(grupo, "nmx_"),
+         grupo = gsub("_", " ", grupo)) %>% 
+  ggplot(aes(x = t, y = nmx, group = grupo, color = grupo)) +
+  geom_line(linewidth = .7) +
   scale_x_continuous(n.breaks = 10) +
-  labs(title = "Hombres negros") +
-  theme_bw(base_size = 12)
+  labs(color = "Grupo",
+       caption = "Fuente: Elaboración propia") +
+  theme_bw(base_size = 12) +
+  theme(legend.position = "bottom")
 
-g3 <- mujeres_b %>% 
-  ggplot(aes(x = t, y = nmx, group = 1)) +
-  geom_line() +
-  scale_x_continuous(n.breaks = 10) +
-  labs(title = "Mujeres blancas") +
-  theme_bw(base_size = 12)
-  
-
-g4 <- mujeres_n %>% 
-  ggplot(aes(x = t, y = nmx, group = 1)) +
-  geom_line() +
-  scale_x_continuous(n.breaks = 10) +
-  labs(title = "Mujeres negras") +
-  theme_bw(base_size = 12)
-
-fig1 <- cowplot::plot_grid(g1, g2, g3, g4, labels = "AUTO")
 
 # lx
 
-g1 <- hombres_b %>% 
-  ggplot(aes(x = t, y = lx, group = 1)) +
-  geom_line() +
+fig2 <- data.frame(edad = hombres_b$edad,
+           t = hombres_b$t,
+           lx_hombres_blancos = hombres_b$lx,
+           lx_hombres_negros = hombres_n$lx,
+           lx_mujeres_blancas = mujeres_b$lx,
+           lx_mujeres_negras = mujeres_n$lx) %>% 
+  mutate(edad = factor(edad, levels = edad)) %>% 
+  pivot_longer(cols = -c(1,2),
+               names_to = "grupo",
+               values_to = "lx") %>% 
+  mutate(grupo = str_remove(grupo, "lx"),
+         grupo = gsub("_", " ", grupo)) %>% 
+  ggplot(aes(x = t, y = lx, group = grupo, color = grupo)) +
+  geom_line(linewidth = .7) +
   scale_x_continuous(n.breaks = 10) +
   scale_y_continuous(n.breaks = 10) +
-  labs(title = "Hombres blancos") +
-  theme_bw(base_size = 12)
-  
-
-g2 <- hombres_n %>% 
-  ggplot(aes(x = t, y = lx, group = 1)) +
-  geom_line() +
-  scale_x_continuous(n.breaks = 10) +
-  scale_y_continuous(n.breaks = 10) +
-  labs(title = "Hombres negros") +
-  theme_bw(base_size = 12)
-
-g3 <- mujeres_b %>% 
-  ggplot(aes(x = t, y = lx, group = 1)) +
-  geom_line() +
-  scale_x_continuous(n.breaks = 10) +
-  scale_y_continuous(n.breaks = 10) +
-  labs(title = "Mujeres blancas") +
-  theme_bw(base_size = 12)
-  
-
-g4 <- mujeres_n %>% 
-  ggplot(aes(x = t, y = lx, group = 1)) +
-  geom_line() +
-  scale_x_continuous(n.breaks = 10) +
-  scale_y_continuous(n.breaks = 10) +
-  labs(title = "Mujeres negras") +
-  theme_bw(base_size = 12)
-
-fig2 <- cowplot::plot_grid(g1, g2, g3, g4, labels = "AUTO")
+  labs(color = "Grupo",
+       caption = "Fuente: Elaboración propia") +
+  theme_bw(base_size = 12) +
+  theme(legend.position = "bottom")
 
 # ex
 
-g1 <- hombres_b %>% 
-  ggplot(aes(x = t, y = ex, group = 1)) +
-  geom_line() +
+fig3 <- data.frame(edad = hombres_b$edad,
+           t = hombres_b$t,
+           ex_hombres_blancos = hombres_b$ex,
+           ex_hombres_negros = hombres_n$ex,
+           ex_mujeres_blancas = mujeres_b$ex,
+           ex_mujeres_negras = mujeres_n$ex) %>% 
+  mutate(edad = factor(edad, levels = edad)) %>% 
+  pivot_longer(cols = -c(1,2),
+               names_to = "grupo",
+               values_to = "ex") %>% 
+  mutate(grupo = str_remove(grupo, "ex"),
+         grupo = gsub("_", " ", grupo)) %>% 
+  ggplot(aes(x = t, y = ex, group = grupo, color = grupo)) +
+  geom_line(linewidth = .7) +
   scale_x_continuous(n.breaks = 10) +
   scale_y_continuous(n.breaks = 10) +
-  labs(title = "Hombres blancos") +
-  theme_bw(base_size = 12)
-  
-
-g2 <- hombres_n %>% 
-  ggplot(aes(x = t, y = ex, group = 1)) +
-  geom_line() +
-  scale_x_continuous(n.breaks = 10) +
-  scale_y_continuous(n.breaks = 10) +
-  labs(title = "Hombres negros") +
-  theme_bw(base_size = 12)
-
-g3 <- mujeres_b %>% 
-  ggplot(aes(x = t, y = ex, group = 1)) +
-  geom_line() +
-  scale_x_continuous(n.breaks = 10) +
-  scale_y_continuous(n.breaks = 10) +
-  labs(title = "Mujeres blancas") +
-  theme_bw(base_size = 12)
-  
-
-g4 <- mujeres_n %>% 
-  ggplot(aes(x = t, y = ex, group = 1)) +
-  geom_line() +
-  scale_x_continuous(n.breaks = 10) +
-  scale_y_continuous(n.breaks = 10) +
-  labs(title = "Mujeres negras") +
-  theme_bw(base_size = 12)
-
-fig3 <- cowplot::plot_grid(g1, g2, g3, g4, labels = "AUTO")
+  labs(color = "Grupo",
+       caption = "Fuente: Elaboración propia") +
+  theme_bw(base_size = 12) +
+  theme(legend.position = "bottom")
 
 # sobrevivencia
 
-g1 <- hombres_b %>% 
-  ggplot(aes(x = t, y = sobrevivencia, group = 1)) +
-  geom_line() +
+fig4 <- data.frame(edad = hombres_b$edad,
+           t = hombres_b$t,
+           sobrevivencia_hombres_blancos = hombres_b$sobrevivencia,
+           sobrevivencia_hombres_negros = hombres_n$sobrevivencia,
+           sobrevivencia_mujeres_blancas = mujeres_b$sobrevivencia,
+           sobrevivencia_mujeres_negras = mujeres_n$sobrevivencia) %>% 
+  mutate(edad = factor(edad, levels = edad)) %>% 
+  pivot_longer(cols = -c(1,2),
+               names_to = "grupo",
+               values_to = "sobrevivencia") %>% 
+  mutate(grupo = str_remove(grupo, "sobrevivencia"),
+         grupo = gsub("_", " ", grupo)) %>% 
+  ggplot(aes(x = t, y = sobrevivencia, group = grupo, color = grupo)) +
+  geom_line(linewidth = .7) +
   geom_hline(aes(yintercept = .5), linetype = "dashed", color = "grey20") +
   scale_x_continuous(n.breaks = 10) +
-  scale_y_continuous(n.breaks = 10) +
-  labs(title = "Hombres blancos") +
-  theme_bw(base_size = 12)
+  labs(color = "Grupo",
+       caption = "Fuente: Elaboración propia") +
+  theme_bw(base_size = 12) +
+  theme(legend.position = "bottom")
 
 
-g2 <- hombres_n %>% 
-  ggplot(aes(x = t, y = sobrevivencia, group = 1)) +
-  geom_line() +
-  geom_hline(aes(yintercept = .5), linetype = "dashed", color = "grey20") +
-  scale_x_continuous(n.breaks = 10) +
-  scale_y_continuous(n.breaks = 10) +
-  labs(title = "Hombres negros") +
-  theme_bw(base_size = 12)
-
-g3 <- mujeres_b %>% 
-  ggplot(aes(x = t, y = sobrevivencia, group = 1)) +
-  geom_line() +
-  geom_hline(aes(yintercept = .5), linetype = "dashed", color = "grey20") +
-  scale_x_continuous(n.breaks = 10) +
-  scale_y_continuous(n.breaks = 10) +
-  labs(title = "Mujeres blancas") +
-  theme_bw(base_size = 12)
-
-
-g4 <- mujeres_n %>% 
-  ggplot(aes(x = t, y = sobrevivencia, group = 1)) +
-  geom_line() +
-  geom_hline(aes(yintercept = .5), linetype = "dashed", color = "grey20") +
-  scale_x_continuous(n.breaks = 10) +
-  scale_y_continuous(n.breaks = 10) +
-  labs(title = "Mujeres negras") +
-  theme_bw(base_size = 12)
-
-fig4 <- cowplot::plot_grid(g1, g2, g3, g4, labels = "AUTO")
-mean(hombres_b$nmx); mean(hombres_n$nmx); mean(mujeres_b$nmx); mean(mujeres_n$nmx)
 ```
 
 
-
-### 1. Complete las tablas de vida completa para cada raza por separado, calculando nmx , Tx y ex.
-
-Respuesta en archivo Excel adjunto.
+## Compare la experiencia de mortalidad de estos cuatro grupos. Describa las diferencias en términos de nmx, lx y ex. ¿Cómo cambian esas diferencias a medida que los cuatro grupos avanzan en edad? 
 
 
-### 2. Compare la experiencia de mortalidad de estos cuatro grupos. Describa las diferencias en términos de nmx, lx y ex. ¿Cómo cambian esas diferencias a medida que los cuatro grupos avanzan en edad? 
+### Mortalidad
 
-Considere en su discusión:
-
-a) el efecto de la raza y el género en el proceso bajo estudio
-b) los años en que la tasa de mortalidad alcanza sus valores más altos y
-c) las diferencias en la función de sobrevivencia. Use gráficos cuando le parezca apropiado
-
-
-
-- Tendencia transversal a los grupos: a mayor edad, mayor es la tasa de mortalidad, lo cual indica una tendencia monótona de la tasa. Asimismo, para todos los grupos la tasa de mortalidad alcanza sus mayores valores en la edad culmine de la tabla de vida, esto es, la población que tiene 100 años o más. Esto sugiere que la probabilidad de experimentar la muerte es mucho mayor en dicha edad en comparación a edades menores. Por otra parte, es posible sostener que la tasa de mortalidad comienza a crecer exponencialmente cuando se adentra en la población de 70 años hacía adelante, indicando de algun modo una descripción o comportamiento general de la población (a los 80 años o más hay la tasa de mortalidad crece considerablemente).
-
-Comparando el panel A con el B, es posible apreciar diferencias en la tasa de mortalidad. Lo primero a mencionar es que la tasa de mortalidad es generalmente mas baja para los hombres negros que para los hombres blancos, ya que el valor de esta tasa para la edad maxima en los primeros es de 0.4 y la de los segundos 0.5 aprox. Segundo, tambien cabe destacar que la tasa de mortalidad en los recien nacidos (es decir, de los 0-1 años) es mayor en los hombres negros que en los blancos. Tercero, el aumento exponencial de la tasa de mortalidad en los hombres blancos ocurre de manera más brusca o rapida entre los 80 y 90 años. Por su parte, si bien los hombres negros muestran una tasa relativamente mayor desde los 60 años, el crecimiento de esta curva es más suave acercandose a los 80 y 90 años. En definitiva, esto puede sugerir en los hombres blancos el transito desde los 85 años en adelante incrementa en mayor medida su probabilidad de morir que en los hombres negros. 
-
-
-Comparando el panel C con D. Al igual que en los hombres, entre las muejres blanchas y negras se aprecia que estas ultimas tienen tasas de mortalidad menores que las primeras. Similramente, la tasa de mortalidad en las muejres negras es mayor en los recien nacios (0 a 1 año) en comparacion a las blancas. En cuanto a la curva, en las mujeres blancas esta muestra un crecimiento más acelerado desde los 85 años, ya que si ene sta edad tenia un avlor aprox de 0.1, en los 95 llega a los 0.25. Por su lado, las mujeres negras muestran un crecimiento mas suave de la curva en las edades mayores; si a los 85 rondaba en el 0.1 aprox, en los 95 llega al 0.2. Esta diferencia sugieren que no solo las mujeres blancas tienen, en general, una mayor tasa de mortalidad que las negras, si no que ademas esta tasa comienza a incrementarse en mayor medida antes en las muejres blancjas que en las negras. 
-
-
-Dentro de los blancos. Hombres tienen mayor yasa de mortalidad que las mujeres en general y a lo largo de la serie. Por ehemplo, en los 90 años los hombres tienen una tasa de 0.2 y las mujeres del 0.15
-
-
-Dentro de los negros: Homres tienen mayor tasa de mortalidad que las mujeres en general y a lo largo de la serie tambien. Por ejemplo en los 60 estos tienen yuna tasa relativamente maor a las mujeres. En los 95 hombres estan en 0.25 y las mujeres en el 0.2
-
-exp
-
-En general, la esperanza de vida para los grupos es de 80 años, pues en esa edad la esp ya se reduce a 10. En el mayor grupo de edad, la esperanza de vida ya es minima, cercana a 0. La surva tamn es monotona: a mayor edad, menor esperanza de vida. La esperanza de vida standar es la de 80 años.
-
-Ahora, hay algunas diferencias:.
-La esperanza de vida en los hombres negros es menor con comparacion a los hombres blancos al comienzo del ciclo de vida (0-1 año), lo cual se asocia a una mayor tasa de mortalidad en estos años en los negros. En egeneral, los blancs tienen mayor esperanza de vida en la serrue 
-
-En las mujeres, las blancas tamb tienen mayor esp al comienzo, aunque menos marcado que en los hombres
-
-Entre hombres y mujeres. Incialmente la esp de vida es mayor para las mujeres blancas que para los hombres blancos. Esto se mantiene relativamente estable hasta os 65, ya que en los 50 por ejemplo, los hombres tiene una esp de 30 y las mujeres de 35. En los negros: notablemente las mujeres tienen mayor esperanza de vida que los hombres a la edad inicial, a los 50 tamb se mantiene una dif de 5 años. En edades avanzadas las esp de tienen a coincidir, es muy baja. 
-
-lx set de riesgo
-
-En general se aprecia que el set de riesgo disminuye con la edad, es decir, hay menos personas a medida que pasa la edad pues experimentan el evento de morir.
-
-A con B. Se observa que hay un lx mayor en A que en B, y que esta lytma myesra una caida mas pronunciada que A. Por ejemplo, en los 70 la caida en B es más acalereda, en donde habian 6 mil negros, los blancos eran 7 mil 500 aprox.
-
-C con D. Lo mismo, hay mas blancas que negras. Tamb hay una pendiente mas acalerada en las negras. Cuiriso es que al final de la serie, hay mas negras que blancas, lo que puede asociarse a la menor tasa de mortalidad de las primeras respecto a las segundas.  
-
-Hombres y mujeres. Sean negros o blancos, hay mas mujeres que hombres en el tiempo. Por ejmplo, en los 80 años. La comparacion de las cirvas da a entender aquello, a mayor edad aun se mantiene mayor set de riesgo en las mujeres que en los hombres, y luegi esto cae. 
-
-
-sobrevivencia
-
-Todas las funciones de sobrevivencia muestran una forma comun: una monotna tendencia al no incremento en funcion del tiempo. Al incio del tiempo, adquiere valor 1 pues hay alta probabilidad de sobrevivir al evento. La fncion de sovre cae lentamete, y a mayor edad hay menor porb de sobrevivir al evento
-
-Esta probabiliad de sobrevivir al evento es ligeramente menor en los B que en A (relacionado a su mayor tasa de mortalidad en los negros en el inicio). La funcion de sobre es mayor en A que en B, ya que en los 80 años los blancos tienen un 50% de sobrevivir mientras qye los negros un 35%. De todas maneras, tengo mas lx de blancos que de negros.
-
-En las C tambien la f de sobreviencia es mayor que en D. Por ejmplo, a los 80 las blancas ienen un 60 de sobrevivir, mientras que las negras un 55% aprox. 
-
-Las mujeres tienen mayor sobrevivencia que los hombres. 
-
-
+En la Figura 1 se muestran las tasa de mortalidad para cada grupo a lo largo de los años en la tabla de vida. De manera transversal a los grupos, se observa que a mayor edad, mayor es la tasa de mortalidad, lo cual sugiere una tendencia monótona de la tasa. Esto tiene sentido en la medida que en los tramos de edades más avanzadas hay una mayor proporción de la población que puede experimentar la muerte en comparación a menores edades, lo cual es evidente en el tramo de los 100 años o más en donde esta tasa alcanza sus mayores valores en todos los grupos. Además, se puede sostener que la tasa de mortalidad comienza a aumentar exponencialmente cuando nos adentramos a los 70 años en adelante (en los 80 años o más la tasa crece considerablemente), relevando ciertas diferencias entre los grupos ya que hasta antes de los 55-60 años estas son indistinguibles.
 
 ```{r figura1, echo=FALSE, fig.cap="Tasa de mortalidad para cada grupo, EE.UU 2017", fig.align='center'}
 
@@ -332,8 +212,13 @@ fig1
 
 ```
 
+Comparando a los hombres y mujeres blancas con los hombres y mujeres negras se aprecia que la tasa de mortalidad es generalmente más baja para los últimos que para los primeros. Por ejemplo, en los hombres negros el valor máximo de la tasa de mortalidad alcanza un 0.4, mientras que en los hombres blancos esta es del 0.5, aproximadamente (en las mujeres es de 0.45 y 0.37, respectivamente). Mirando al inicio del ciclo de vida, también se notan diferencias pues la tasa de mortalidad es relativamente mayor en personas negras que en las blancas en los primeros años del nacimiento (0 a 1 año). Esto puede estar asociado a que las personas negras recién nacidas tienden a morir más en comparación a las personas blancas recién nacidas. Además, la evolución de la curva es distinta entre estos grupos; por un lado, las mujeres y hombres blancos experimentan un aumento exponencial más brusco de esta tasa entre los 80 y 90 años mientras que, por el otro, las mujeres y hombres negros muestran un aumento más suave de la mortalidad en dichas edades. Sin embargo, tanto las mujeres como los hombres negros exhiben un aumento más temprano en la tasa de mortalidad que las personas blancas, siendo notorio desde los 60 años en adelante.  
 
+Por su parte, también hay diferencias de mortalidad entre hombres y mujeres. A partir de la Figura 1 se puede sostener que las mujeres tienen una tasa de mortalidad menor que los hombres en promedio y a lo largo de toda la serie. Por ejemplo, los hombres blancos tienen una tasa aproximada del 0.2 en los 90 años, mientras que las mujeres en la misma edad presentan una tasa del 0.15. Esto es similar en los hombres y mujeres negras a los 90 años, donde estas tienen una diferencia de mortalidad de 0.5 con los hombres. Así, la condición de sexo femenino se asocia tanto con una mayor mortalidad general como en edades más avanzadas, en comparación con el sexo masculino. 
 
+### Esperanza de vida y sobrevivencia
+
+En la Figura 2 se muestra la esperanza de vida para los grupos bajo estudio en todas las edades. En general, la esperanza de vida es alta al comienzo del ciclo de vida, y se reduce consistentemente a medida que la edad avanza. Sustantivamente, esto indica que, por ejemplo, las personas recién nacidas tienen una esperanza de vida de 80 años en promedio, mientras que quienes tienen 80 años cuentan con una esperanza de vida no mayor 10 años.  Así, la forma de la esperanza de vida sugiere una tendencia monótona hacia la baja, convergiendo todos los grupos en el tramo superior de 100 años o más a un valor cercano al 0, es decir, una casi nula esperanza de vida (cuando la mortalidad alcanza su mayor valor).
 
 ```{r figura2, echo=FALSE, fig.cap="Número de supervivientes para cada grupo, EE.UU 2017", fig.align='center'}
 
@@ -341,6 +226,11 @@ fig2
 
 ```
 
+La esperanza de vida es diferente de acuerdo con la raza de las personas. Las personas negras (hombres y mujeres) tienen una menor esperanza de vida en relación con las personas blancas, cuestión aún más notable en los tramos de menor edad y en el grupo de los recién nacidos. Esto se asocia en gran medida con el hecho de que las personas negras son quienes, a su vez, tienen una mayor tasa de mortalidad en dichas edades, reduciendo su esperanza de vida hacia adelante. El grupo que mejor ejemplifica lo anterior son los hombres negros en relación con los hombres blancos, diferencias que se mantienen en el tiempo. Además, se debe recordar que los hombres y mujeres negras experimentan un aumento más temprano en su tasa de mortalidad (desde los 60 años en adelante) en relación con las personas blancas, lo cual reduce su esperanza de vida en un punto anterior a las personas blancas.
+
+Dado que los hombres experimentan un aumento en la mortalidad más temprano que las mujeres, la esperanza de vida de estas últimas son mayores en prácticamente todos los tramos etarios. A partir de la Figura 2 se puede sostener que las mujeres tienen una esperanza de vida mayor que los hombres, siendo estas diferencias estables en el tiempo hasta aproximarse a edades muy avanzadas (85-90 años). Los motivos a través de los cuales las mujeres tienen una mayor esperanza de vida son variados, abarcando elementos relativos a la salud, el tipo de ocupación o el nivel socioeconómico. 
+
+Asociada con su esperanza de vida, la Figura 3 muestra que la cantidad de personas de raza negra supervivientes con el paso del tiempo disminuye en mayor medida que la cantidad de personas blancas supervivientes. Así, por ejemplo, el set de riesgo de los hombres negros inicia el ciclo de vida en un nivel menor que los hombres blancos, manteniendose hasta el final de la serie, en tanto el set de riesgo de los hombres blancos es mayor y con una caída menos pronunciada. Esto se repite para el caso de las mujeres blancas con mujeres negras, ya que la curva es más acelerada para estas últimas dejando un set de riesgo de mujeres blancas mayor. Vale la pena resaltar que, en el último tramo de 100 años o más, curiosamente hay más hombres y mujeres negras que hombres y mujeres blancas, lo cual puede relacionarse con su menor tasa de mortalidad respecto a este grupo racial. 
 
 
 ```{r figura3, echo=FALSE, fig.cap="Esperanza de vida para cada grupo, EE.UU 2017", fig.align='center'}
@@ -349,6 +239,11 @@ fig3
 
 ```
 
+Las mujeres también presentan una cantidad de supervivientes mayor al de los hombres en ambas razas. Esto tiene sentido considerando que las mujeres tienen una mayor esperanza de vida que los hombres, así como también una menor mortalidad a lo largo del ciclo. Así, por ejemplo, si en los 80 años los hombres blancos se acercan a los 5.000 supervivientes aproximadamente, en las mujeres blancas estos ascienden a 6.500 supervivientes. 
+
+
+Para representar mejor la probabilidad de sobrevivir a la muerte entre los grupos, en la Figura 4 se representa la función de sobrevivencia a lo largo del tiempo. Todas las funciones de sobrevivencia muestran una forma común: una monótona tendencia al no incremento en función del tiempo. Al inicio del tiempo, adquiere valor 1 pues hay alta probabilidad de sobrevivir al evento, cayendo lentamente a medida que pasa el tiempo pues hay menor probabilidad de sobrevivir al evento, tomando valor 0. Esto se relaciona directamente con la disminución del set de riesgo, tanto en la cantidad de supervivientes como en el ritmo del decrecimiento. 
+
 
 ```{r figura4, echo=FALSE, fig.cap="Función de sobrevivencia para cada grupo, EE.UU 2017", fig.align='center'}
 
@@ -356,8 +251,14 @@ fig4
 
 ```
 
-\newpage
-### 3. Aunque ha calculado tablas de vida especificas por raza y género, piense cómo se podría “estimar” el efecto de la raza sobre el evento “morir” usando una función de la tabla de vida, es decir, ¿cuál es el riesgo de muerte entre los hombres (si prefiere, mujeres) blancos en comparación a los hombres (mujeres) negros? ¿Se puede estimar ese efecto con estos datos? ¿Cómo lo haría?
+Las personas de raza negra muestran una caída más pronunciada de la función de sobrevivencia en comparación a las personas de raza blanca. Esto quiere decir que la probabilidad de sobrevivir al evento de muerte es menor en las personas negras que en las blancas, ya que si tomamos por ejemplo a los hombres negros y blancos a la edad de 80 años, podemos observar que los blancos tienen un 50% de probabilidad de sobrevivir al evento mientras que los negros solo un 35%. Así, esto puede estar indicando que en los grupos de raza negra hay un mayor riesgo a experimentar el evento de morir, lo cual encuentra un correlato con una mayor tasa de mortalidad en edades tempranas en este grupo, así como también un aumento en la mortalidad más temprano (forma de la curva).  
 
-hazard con covariables? regresion de cox
+Finalmente, las mujeres tienen una función de sobrevivencia mayor a la de los hombres. Relacionándolo con su mayor esperanza de vida y menor mortalidad, así como un set de riesgo más grande, las mujeres experimentan menos probabilidades de morir que los hombres independiente de su raza. Sustantivamente, esto tiene por consecuencia no solo una mejor chance de sobrevivir en las mujeres, sino que también al final del ciclo estas conformarán una población mayor en relación con los hombres. 
+
+## ¿Cómo estimar el efecto de la raza sobre el evento morir?
+
+Utilizando los datos disponibles, pienso que se podría estimar un modelo de regresión que busque predecir la probabilidad de experimentar el evento ingresando la raza como una covariable. Uniendo las bases de datos de hombres blancos y negros, se podría generar una variable dummy que represente la raza y estimar la función de Hazard como variable dependiente que representa el riesgo de experimentar la muerte. En detalle, la función de Hazard nos indica la probabilidad de experimentar el evento en un tiempo j dado condicionado al hecho de que el evento aún no ha ocurrido, y su función acumulada considera estas probabilidades en los intervalos pasados. Esto permitiría examinar cómo la raza influye en la tasa de riesgo de muerte en diferentes intervalos de tiempo a lo largo del estudio, además de poder controlar por otras variables y modelar otros tipos de relaciones.
+
+Otra alternativa sería emplear un modelo de supervivencia, donde se considere el tiempo hasta la ocurrencia del evento de muerte como la variable dependiente y la raza como un predictor. Este enfoque permitiría estimar los coeficientes de riesgo relativo entre los grupos raciales en comparación con una línea de base común, ofreciendo así una perspectiva detallada sobre cómo la raza influye en el riesgo de mortalidad. Además, al utilizar este modelo, se pueden controlar otras covariables relevantes que puedan afectar la relación entre la raza y el evento de muerte.
+
 

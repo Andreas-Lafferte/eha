@@ -1,0 +1,333 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  12pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=2cm]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{spanish}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\usepackage{graphicx}
+\usepackage{times}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{floatrow}
+\floatsetup[figure]{capposition=top}
+\floatsetup[table]{capposition=top}
+\floatplacement{figure}{H}
+\floatplacement{table}{h}
+\usepackage{booktabs}
+\usepackage{longtable}
+\newcommand{\sectionbreak}{\clearpage}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{eso-pic}
+\AtBeginDocument{\AddToShipoutPictureBG*{\put(0,\dimexpr\paperheight-4cm){\makebox[0pt][l]{\hspace{1cm}\includegraphics[width=4cm]{logo_isuc.png}}}}}
+\usepackage[subrefformat=simple]{subfig}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Tarea 2},
+  pdflang={es},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{\textbf{Tarea 2}}
+\author{Clase: Análisis de Historias de Eventos\\
+Profesora: Viviana Salinas\\
+Estudiante: Andreas Laffert\\
+email:
+\href{mailto:alaffertt@estudiante.uc.cl}{\nolinkurl{alaffertt@estudiante.uc.cl}}}
+\date{Fecha: 02-08-2023}
+
+\begin{document}
+\maketitle
+
+\setstretch{1.15}
+\begin{verbatim}
+## [1] 0.05164612
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 0.04828522
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 0.04079918
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 0.03741774
+\end{verbatim}
+
+\hypertarget{complete-las-tablas-de-vida-completa-para-cada-raza-por-separado-calculando-nmx-tx-y-ex.}{%
+\subsubsection{1. Complete las tablas de vida completa para cada raza
+por separado, calculando nmx , Tx y
+ex.}\label{complete-las-tablas-de-vida-completa-para-cada-raza-por-separado-calculando-nmx-tx-y-ex.}}
+
+Respuesta en archivo Excel adjunto.
+
+\hypertarget{compare-la-experiencia-de-mortalidad-de-estos-cuatro-grupos.-describa-las-diferencias-en-tuxe9rminos-de-nmx-lx-y-ex.-cuxf3mo-cambian-esas-diferencias-a-medida-que-los-cuatro-grupos-avanzan-en-edad}{%
+\subsubsection{2. Compare la experiencia de mortalidad de estos cuatro
+grupos. Describa las diferencias en términos de nmx, lx y ex. ¿Cómo
+cambian esas diferencias a medida que los cuatro grupos avanzan en
+edad?}\label{compare-la-experiencia-de-mortalidad-de-estos-cuatro-grupos.-describa-las-diferencias-en-tuxe9rminos-de-nmx-lx-y-ex.-cuxf3mo-cambian-esas-diferencias-a-medida-que-los-cuatro-grupos-avanzan-en-edad}}
+
+Considere en su discusión:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  el efecto de la raza y el género en el proceso bajo estudio
+\item
+  los años en que la tasa de mortalidad alcanza sus valores más altos y
+\item
+  las diferencias en la función de sobrevivencia. Use gráficos cuando le
+  parezca apropiado
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Tendencia transversal a los grupos: a mayor edad, mayor es la tasa de
+  mortalidad, lo cual indica una tendencia monótona de la tasa.
+  Asimismo, para todos los grupos la tasa de mortalidad alcanza sus
+  mayores valores en la edad culmine de la tabla de vida, esto es, la
+  población que tiene 100 años o más. Esto sugiere que la probabilidad
+  de experimentar la muerte es mucho mayor en dicha edad en comparación
+  a edades menores. Por otra parte, es posible sostener que la tasa de
+  mortalidad comienza a crecer exponencialmente cuando se adentra en la
+  población de 70 años hacía adelante, indicando de algun modo una
+  descripción o comportamiento general de la población (a los 80 años o
+  más hay la tasa de mortalidad crece considerablemente).
+\end{itemize}
+
+Comparando el panel A con el B, es posible apreciar diferencias en la
+tasa de mortalidad. Lo primero a mencionar es que la tasa de mortalidad
+es generalmente mas baja para los hombres negros que para los hombres
+blancos, ya que el valor de esta tasa para la edad maxima en los
+primeros es de 0.4 y la de los segundos 0.5 aprox. Segundo, tambien cabe
+destacar que la tasa de mortalidad en los recien nacidos (es decir, de
+los 0-1 años) es mayor en los hombres negros que en los blancos.
+Tercero, el aumento exponencial de la tasa de mortalidad en los hombres
+blancos ocurre de manera más brusca o rapida entre los 80 y 90 años. Por
+su parte, si bien los hombres negros muestran una tasa relativamente
+mayor desde los 60 años, el crecimiento de esta curva es más suave
+acercandose a los 80 y 90 años. En definitiva, esto puede sugerir en los
+hombres blancos el transito desde los 85 años en adelante incrementa en
+mayor medida su probabilidad de morir que en los hombres negros.
+
+Comparando el panel C con D. Al igual que en los hombres, entre las
+muejres blanchas y negras se aprecia que estas ultimas tienen tasas de
+mortalidad menores que las primeras. Similramente, la tasa de mortalidad
+en las muejres negras es mayor en los recien nacios (0 a 1 año) en
+comparacion a las blancas. En cuanto a la curva, en las mujeres blancas
+esta muestra un crecimiento más acelerado desde los 85 años, ya que si
+ene sta edad tenia un avlor aprox de 0.1, en los 95 llega a los 0.25.
+Por su lado, las mujeres negras muestran un crecimiento mas suave de la
+curva en las edades mayores; si a los 85 rondaba en el 0.1 aprox, en los
+95 llega al 0.2. Esta diferencia sugieren que no solo las mujeres
+blancas tienen, en general, una mayor tasa de mortalidad que las negras,
+si no que ademas esta tasa comienza a incrementarse en mayor medida
+antes en las muejres blancjas que en las negras.
+
+Dentro de los blancos. Hombres tienen mayor yasa de mortalidad que las
+mujeres en general y a lo largo de la serie. Por ehemplo, en los 90 años
+los hombres tienen una tasa de 0.2 y las mujeres del 0.15
+
+Dentro de los negros: Homres tienen mayor tasa de mortalidad que las
+mujeres en general y a lo largo de la serie tambien. Por ejemplo en los
+60 estos tienen yuna tasa relativamente maor a las mujeres. En los 95
+hombres estan en 0.25 y las mujeres en el 0.2
+
+exp
+
+En general, la esperanza de vida para los grupos es de 80 años, pues en
+esa edad la esp ya se reduce a 10. En el mayor grupo de edad, la
+esperanza de vida ya es minima, cercana a 0. La surva tamn es monotona:
+a mayor edad, menor esperanza de vida. La esperanza de vida standar es
+la de 80 años.
+
+Ahora, hay algunas diferencias:. La esperanza de vida en los hombres
+negros es menor con comparacion a los hombres blancos al comienzo del
+ciclo de vida (0-1 año), lo cual se asocia a una mayor tasa de
+mortalidad en estos años en los negros. En egeneral, los blancs tienen
+mayor esperanza de vida en la serrue
+
+En las mujeres, las blancas tamb tienen mayor esp al comienzo, aunque
+menos marcado que en los hombres
+
+Entre hombres y mujeres. Incialmente la esp de vida es mayor para las
+mujeres blancas que para los hombres blancos. Esto se mantiene
+relativamente estable hasta os 65, ya que en los 50 por ejemplo, los
+hombres tiene una esp de 30 y las mujeres de 35. En los negros:
+notablemente las mujeres tienen mayor esperanza de vida que los hombres
+a la edad inicial, a los 50 tamb se mantiene una dif de 5 años. En
+edades avanzadas las esp de tienen a coincidir, es muy baja.
+
+lx set de riesgo
+
+En general se aprecia que el set de riesgo disminuye con la edad, es
+decir, hay menos personas a medida que pasa la edad pues experimentan el
+evento de morir.
+
+A con B. Se observa que hay un lx mayor en A que en B, y que esta lytma
+myesra una caida mas pronunciada que A. Por ejemplo, en los 70 la caida
+en B es más acalereda, en donde habian 6 mil negros, los blancos eran 7
+mil 500 aprox.
+
+C con D. Lo mismo, hay mas blancas que negras. Tamb hay una pendiente
+mas acalerada en las negras. Cuiriso es que al final de la serie, hay
+mas negras que blancas, lo que puede asociarse a la menor tasa de
+mortalidad de las primeras respecto a las segundas.
+
+Hombres y mujeres. Sean negros o blancos, hay mas mujeres que hombres en
+el tiempo. Por ejmplo, en los 80 años. La comparacion de las cirvas da a
+entender aquello, a mayor edad aun se mantiene mayor set de riesgo en
+las mujeres que en los hombres, y luegi esto cae.
+
+sobrevivencia
+
+Todas las funciones de sobrevivencia muestran una forma comun: una
+monotna tendencia al no incremento en funcion del tiempo. Al incio del
+tiempo, adquiere valor 1 pues hay alta probabilidad de sobrevivir al
+evento. La fncion de sovre cae lentamete, y a mayor edad hay menor porb
+de sobrevivir al evento
+
+Esta probabiliad de sobrevivir al evento es ligeramente menor en los B
+que en A (relacionado a su mayor tasa de mortalidad en los negros en el
+inicio). La funcion de sobre es mayor en A que en B, ya que en los 80
+años los blancos tienen un 50\% de sobrevivir mientras qye los negros un
+35\%. De todas maneras, tengo mas lx de blancos que de negros.
+
+En las C tambien la f de sobreviencia es mayor que en D. Por ejmplo, a
+los 80 las blancas ienen un 60 de sobrevivir, mientras que las negras un
+55\% aprox.
+
+Las mujeres tienen mayor sobrevivencia que los hombres.
+
+\begin{figure}
+
+{\centering \includegraphics{C:\Users\alaffert\OneDrive - Ministerio del Trabajo y Previsión Social\Documentos\GitHub\eha\output\tarea2_files/figure-latex/figura1-1} 
+
+}
+
+\caption{Tasa de mortalidad para cada grupo, EE.UU 2017}\label{fig:figura1}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{C:\Users\alaffert\OneDrive - Ministerio del Trabajo y Previsión Social\Documentos\GitHub\eha\output\tarea2_files/figure-latex/figura2-1} 
+
+}
+
+\caption{Número de supervivientes para cada grupo, EE.UU 2017}\label{fig:figura2}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{C:\Users\alaffert\OneDrive - Ministerio del Trabajo y Previsión Social\Documentos\GitHub\eha\output\tarea2_files/figure-latex/figura3-1} 
+
+}
+
+\caption{Esperanza de vida para cada grupo, EE.UU 2017}\label{fig:figura3}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{C:\Users\alaffert\OneDrive - Ministerio del Trabajo y Previsión Social\Documentos\GitHub\eha\output\tarea2_files/figure-latex/figura4-1} 
+
+}
+
+\caption{Función de sobrevivencia para cada grupo, EE.UU 2017}\label{fig:figura4}
+\end{figure}
+
+\newpage
+
+\hypertarget{aunque-ha-calculado-tablas-de-vida-especificas-por-raza-y-guxe9nero-piense-cuxf3mo-se-podruxeda-estimar-el-efecto-de-la-raza-sobre-el-evento-morir-usando-una-funciuxf3n-de-la-tabla-de-vida-es-decir-cuuxe1l-es-el-riesgo-de-muerte-entre-los-hombres-si-prefiere-mujeres-blancos-en-comparaciuxf3n-a-los-hombres-mujeres-negros-se-puede-estimar-ese-efecto-con-estos-datos-cuxf3mo-lo-haruxeda}{%
+\subsubsection{3. Aunque ha calculado tablas de vida especificas por
+raza y género, piense cómo se podría ``estimar'' el efecto de la raza
+sobre el evento ``morir'' usando una función de la tabla de vida, es
+decir, ¿cuál es el riesgo de muerte entre los hombres (si prefiere,
+mujeres) blancos en comparación a los hombres (mujeres) negros? ¿Se
+puede estimar ese efecto con estos datos? ¿Cómo lo
+haría?}\label{aunque-ha-calculado-tablas-de-vida-especificas-por-raza-y-guxe9nero-piense-cuxf3mo-se-podruxeda-estimar-el-efecto-de-la-raza-sobre-el-evento-morir-usando-una-funciuxf3n-de-la-tabla-de-vida-es-decir-cuuxe1l-es-el-riesgo-de-muerte-entre-los-hombres-si-prefiere-mujeres-blancos-en-comparaciuxf3n-a-los-hombres-mujeres-negros-se-puede-estimar-ese-efecto-con-estos-datos-cuxf3mo-lo-haruxeda}}
+
+hazard con covariables? regresion de cox
+
+\end{document}
