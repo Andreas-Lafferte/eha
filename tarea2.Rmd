@@ -220,9 +220,9 @@ Por su parte, también hay diferencias de mortalidad entre hombres y mujeres. A 
 
 En la Figura 2 se muestra la esperanza de vida para los grupos bajo estudio en todas las edades. En general, la esperanza de vida es alta al comienzo del ciclo de vida, y se reduce consistentemente a medida que la edad avanza. Sustantivamente, esto indica que, por ejemplo, las personas recién nacidas tienen una esperanza de vida de 80 años en promedio, mientras que quienes tienen 80 años cuentan con una esperanza de vida no mayor 10 años.  Así, la forma de la esperanza de vida sugiere una tendencia monótona hacia la baja, convergiendo todos los grupos en el tramo superior de 100 años o más a un valor cercano al 0, es decir, una casi nula esperanza de vida (cuando la mortalidad alcanza su mayor valor).
 
-```{r figura2, echo=FALSE, fig.cap="Número de supervivientes para cada grupo, EE.UU 2017", fig.align='center'}
+```{r figura2, echo=FALSE, fig.cap="Esperanza de vida para cada grupo, EE.UU 2017", fig.align='center'}
 
-fig2
+fig3
 
 ```
 
@@ -233,9 +233,9 @@ Dado que los hombres experimentan un aumento en la mortalidad más temprano que 
 Asociada con su esperanza de vida, la Figura 3 muestra que la cantidad de personas de raza negra supervivientes con el paso del tiempo disminuye en mayor medida que la cantidad de personas blancas supervivientes. Así, por ejemplo, el set de riesgo de los hombres negros inicia el ciclo de vida en un nivel menor que los hombres blancos, manteniendose hasta el final de la serie, en tanto el set de riesgo de los hombres blancos es mayor y con una caída menos pronunciada. Esto se repite para el caso de las mujeres blancas con mujeres negras, ya que la curva es más acelerada para estas últimas dejando un set de riesgo de mujeres blancas mayor. Vale la pena resaltar que, en el último tramo de 100 años o más, curiosamente hay más hombres y mujeres negras que hombres y mujeres blancas, lo cual puede relacionarse con su menor tasa de mortalidad respecto a este grupo racial. 
 
 
-```{r figura3, echo=FALSE, fig.cap="Esperanza de vida para cada grupo, EE.UU 2017", fig.align='center'}
+```{r figura3, echo=FALSE, fig.cap="Número de supervivientes para cada grupo, EE.UU 2017", fig.align='center'}
 
-fig3
+fig2
 
 ```
 
